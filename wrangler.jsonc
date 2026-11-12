@@ -1,0 +1,20 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "react-shopping-cart",
+  "main": "@astrojs/cloudflare/entrypoints/server",
+  "compatibility_date": "2026-11-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "binding": "ASSETS",
+    "directory": "./dist",
+  },
+  "kv_namespaces": [
+    {
+      "binding": "ORDERS",
+      "id": "c7654569ef65412d9ff61d43a3a7b70a",
+    },
+  ],
+  "observability": {
+    "enabled": true,
+  },
+}

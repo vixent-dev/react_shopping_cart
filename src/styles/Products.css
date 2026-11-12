@@ -1,0 +1,131 @@
+.p-section {
+  margin-top: 2em;
+  margin-inline: 5rem;
+}
+
+.categories {
+  display: flex;
+  overflow-x: auto;
+  gap: 0.5em;
+
+  button {
+    background: transparent;
+    border: 1px solid lightgray;
+    padding: 0.5em 1em;
+
+    &:hover {
+      background: lightgray;
+    }
+  }
+
+  .active {
+    background: lightgray;
+  }
+}
+
+.grid-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+  grid-auto-rows: auto;
+  gap: 1.5em;
+  margin: 2rem auto;
+  will-change: height;
+  list-style: none;
+}
+
+@media (width < 640px) {
+  .p-section {
+    margin-inline: 1em;
+  }
+}
+
+.product {
+  overflow: hidden;
+  position: relative;
+  text-decoration: none;
+
+  will-change: opacity, visibility, transform;
+  transition-property: opacity, visibility;
+  transition-duration: 350ms;
+  transition-timing-function: ease;
+
+  padding: 0.5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100%;
+
+  &:hover,
+  &:focus {
+    h2 {
+      text-decoration: underline;
+    }
+    img {
+      transform: scale(1.1);
+    }
+  }
+
+  .image {
+    border: 1px solid lightgray;
+    position: relative;
+    margin-bottom: 0.5em;
+    overflow: hidden;
+    width: 100%;
+    aspect-ratio: 1/1;
+  }
+
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+    object-position: center;
+    transition: 0.2s ease;
+    padding: 1em;
+  }
+
+  h2 {
+    font-size: 1.125rem;
+    font-weight: 500;
+    line-height: 1.3; /* Es recomendable usar un valor mayor a 1 para líneas múltiples */
+    font-family: "Inter", sans-serif;
+    color: black;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  span {
+    color: gray;
+    font-weight: 500;
+  }
+
+  .product-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-top: auto;
+
+    button {
+      display: grid;
+      place-items: center;
+      background: transparent;
+      color: black;
+      border: 1px solid lightgray;
+      padding: 0.5em;
+      border-radius: 0.25rem;
+      cursor: pointer;
+      z-index: 10;
+
+      &:hover {
+        background-color: lightgray;
+      }
+    }
+  }
+}

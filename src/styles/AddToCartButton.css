@@ -1,0 +1,15 @@
+.add-button {
+  background-color: transparent;
+  color: black;
+  border: 1px solid gray;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+
+  &:hover,
+  &:focus {
+    background-color: gray;
+    color: white;
+  }
+}

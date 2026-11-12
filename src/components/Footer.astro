@@ -1,0 +1,76 @@
+<footer>
+  <h3>Mi <span>Tienda</span>.</h3>
+  <ul>
+    <li>
+      <a href="">
+        Instagram
+        <span class="material-icons md-18">launch</span>
+      </a>
+    </li>
+    <li>
+      <a href="">
+        Facebook
+        <span class="material-icons md-18">launch</span>
+      </a>
+    </li>
+    <li>
+      <a href="">
+        TikTok
+        <span class="material-icons md-18">launch</span>
+      </a>
+    </li>
+  </ul>
+</footer>
+
+<style>
+  footer {
+    background: black;
+    color: white;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 2em;
+    padding-top: 1em;
+    padding-inline: 1em;
+  }
+
+  h3 {
+    font-size: 3rem;
+  }
+
+  h3 span {
+    font-style: italic;
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    margin-bottom: 1.5em;
+  }
+
+  li {
+    list-style: none;
+  }
+
+  a {
+    text-decoration: none;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.4em;
+  }
+
+  a:hover {
+    color: gray;
+  }
+
+  @media (min-width: 640px) {
+    footer {
+      flex-direction: row;
+      align-items: end;
+    }
+  }
+</style>

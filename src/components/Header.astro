@@ -1,0 +1,104 @@
+---
+import Cart from "./Cart.jsx";
+---
+
+<header>
+  <a class="logo" href="/">
+    <h1>Mi Tienda.</h1>
+  </a>
+  <label for="cart-toggle" class="btn cart" aria-label="Carrito">
+    <span class="material-icons">shopping_cart</span>
+  </label>
+</header>
+<input type="checkbox" id="cart-toggle" class="cart-toggle" />
+<aside class="cart-aside">
+  <Cart client:only="react" />
+</aside>
+
+<style>
+  :global(body:has(.nav-toggle:checked)) {
+    overflow: hidden;
+  }
+
+  header {
+    position: sticky;
+    top: 1em;
+    z-index: 20;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5em 2em;
+    background: black;
+    color: white;
+    margin: 1em 2em;
+    border-radius: 1em;
+  }
+
+  @media (min-width: 640px) {
+    header {
+      margin: 1em 200px;
+    }
+  }
+
+  .logo {
+    color: white;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .logo:hover {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .btn {
+    display: grid;
+    place-items: center;
+    color: white;
+    padding: 0.5em;
+    border-radius: 0.25em;
+    cursor: pointer;
+    text-decoration: none;
+    aspect-ratio: 1;
+    transition: all 200ms ease;
+  }
+  .btn:hover {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .cart-aside {
+    position: fixed;
+    inset: 0 0 0 auto;
+    z-index: 40;
+
+    width: min(100%, 30rem);
+    height: 100dvh;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 1.5em;
+    background: white;
+    color: black;
+
+    transform: translateX(100%);
+    visibility: hidden;
+
+    transition:
+      transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      visibility 0s linear 0.35s;
+  }
+
+  .cart-toggle:checked ~ .cart-aside {
+    transform: translateX(0);
+    visibility: visible;
+    transition-delay: 0s;
+  }
+</style>
+
+<script>
+  //@ts-nocheck
+  const toggle = document.querySelector("#cart-toggle");
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && toggle) toggle.checked = false;
+  });
+</script>

@@ -1,0 +1,148 @@
+---
+// @ts-nocheck
+import { getOrderStore } from "../../lib/orders.js";
+import Layout from "../../layouts/Layout.astro";
+export const prerender = false;
+
+const order = await getOrderStore().get(Astro.params.id!);
+if (!order) return Astro.redirect("/");
+
+const pickupText = {
+  asap: "en 15–20 min",
+  "30": "en 30 min",
+  "60": "en 1 hora",
+}[order.pickup];
+const payText =
+  order.paymentMethod === "at_store"
+    ? "Pagas al retirar"
+    : {
+        pending: "Pago pendiente",
+        paid: "Pago aprobado ✅",
+        rejected: "Pago rechazado ❌",
+        ready: "Pago aprobado ✅",
+        picked_up: "Pago aprobado ✅",
+      }[order.status];
+const statusText = {
+  pending: "Recibido",
+  paid: "Recibido",
+  rejected: "No procesado",
+  ready: "¡Listo para retirar!",
+  picked_up: "Entregado",
+}[order.status];
+---
+
+<Layout>
+  <main class="page">
+    <h1 class="title">Pedido {statusText}</h1>
+
+    <div class="code-box">
+      <p class="code-box__label">Código de retiro</p>
+      <p class="code-box__code">{order.code}</p>
+    </div>
+
+    <p class="text">Retiro: {pickupText} · {payText}</p>
+
+    <ul class="items">
+      {
+        order.items.map((i) => (
+          <li>
+            {i.qty} × {i.title}
+          </li>
+        ))
+      }
+    </ul>
+
+    <p class="total">
+      Total: {
+        order.total.toLocaleString("es-CL", {
+          style: "currency",
+          currency: "CLP",
+        })
+      }
+    </p>
+
+    {
+      order.status === "rejected" && (
+        <a href="/checkout" class="link">
+          Volver a intentar
+        </a>
+      )
+    }
+    {
+      order.status === "pending" && order.paymentMethod === "online" && (
+        <a href={`/mock-pago/${order.id}`} class="link">
+          Continuar al pago
+        </a>
+      )
+    }
+  </main>
+</Layout>
+
+<script>
+  import { useCart } from "../../stores/cart";
+  useCart.getState().clearCart();
+</script>
+
+<style>
+  .page,
+  .page * {
+    box-sizing: border-box;
+  }
+
+  .page {
+    max-width: 28rem; /* max-w-md */
+    margin-inline: auto; /* mx-auto */
+    padding: 1.5rem; /* p-6 */
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* space-y-4 */
+  }
+
+  .title {
+    margin: 0;
+    font-size: 1.5rem; /* text-2xl */
+    line-height: 2rem;
+    font-weight: 700;
+  }
+
+  .code-box {
+    padding: 1rem; /* p-4 */
+    border: 1px solid #e5e7eb; /* rounded border */
+    border-radius: 0.25rem;
+    text-align: center;
+  }
+
+  .code-box__label {
+    margin: 0;
+    font-size: 0.875rem; /* text-sm */
+    line-height: 1.25rem;
+  }
+
+  .code-box__code {
+    margin: 0;
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; /* font-mono */
+    font-size: 2.25rem; /* text-4xl */
+    line-height: 2.5rem;
+    font-weight: 700;
+  }
+
+  .text,
+  .total {
+    margin: 0;
+  }
+
+  .total {
+    font-weight: 700;
+  }
+
+  .items {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .link {
+    text-decoration: underline;
+  }
+</style>

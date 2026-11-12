@@ -1,0 +1,112 @@
+/* Tailwind trae un reset (preflight); sin él, hay que replicar lo básico */
+.checkout,
+.checkout *,
+.checkout *::before,
+.checkout *::after {
+  box-sizing: border-box;
+}
+
+.checkout {
+  max-width: 28rem; /* max-w-md */
+  margin-inline: auto; /* mx-auto */
+  padding: 1rem; /* p-4 */
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem; /* space-y-5 */
+}
+
+.checkout-empty {
+  padding: 1rem;
+}
+
+.checkout__title {
+  margin: 0;
+  font-size: 1.5rem; /* text-2xl */
+  line-height: 2rem;
+  font-weight: 700;
+}
+
+/* Lista de productos */
+.checkout__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.checkout__item {
+  display: flex;
+  justify-content: space-between;
+  padding-block: 0.5rem; /* py-2 */
+}
+
+/* divide-y */
+.checkout__item + .checkout__item {
+  border-top: 1px solid #e5e7eb;
+}
+
+.checkout__item--total {
+  font-weight: 700;
+}
+
+/* Inputs y select */
+.checkout__input {
+  width: 100%;
+  padding: 0.5rem; /* p-2 */
+  border: 1px solid #e5e7eb; /* rounded border */
+  border-radius: 0.25rem;
+  font: inherit;
+  background: #fff;
+}
+
+.checkout__label {
+  display: block;
+}
+
+.checkout__select {
+  margin-top: 0.25rem; /* mt-1 */
+}
+
+/* Forma de pago */
+.checkout__fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; /* space-y-2 */
+}
+
+.checkout__legend {
+  padding: 0;
+  margin-bottom: 0.5rem;
+  font-weight: 500; /* font-medium */
+}
+
+.checkout__radio {
+  display: flex;
+  gap: 0.5rem; /* gap-2 */
+  align-items: center;
+}
+
+/* Error */
+.checkout__error {
+  margin: 0;
+  color: #dc2626; /* text-red-600 */
+}
+
+/* Botón */
+.checkout__button {
+  width: 100%;
+  padding: 0.75rem; /* p-3 */
+  border: 0;
+  border-radius: 0.25rem;
+  background: #000;
+  color: #fff;
+  font: inherit;
+  cursor: pointer;
+}
+
+.checkout__button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
